@@ -6,16 +6,16 @@ using System.Web;
 
 namespace KoscielniakInfo.Models
 {
-    public class Exprience
+    public class Job
     {
         public int id { get; set; }
         public string CompanyName { get; set; }
-        public string JobRole { get; set; }
-        public string JobPosition { get; set; }
+        public string Role { get; set; }
+        public string Position { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string WikipediaCompanyName { get; set; }
-        public string JobDescription { get; set; }
+        public string Description { get; set; }
         public virtual ICollection<Project> Projects {get; set;}
         
     }

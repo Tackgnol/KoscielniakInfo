@@ -170,9 +170,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\CVContext.cs" />
+    <Compile Include="DAL\CVInitializer.cs" />
     <Compile Include="Models\Certificate.cs" />
-    <Compile Include="Models\Education.cs" />
-    <Compile Include="Models\Exprience.cs" />
+    <Compile Include="Models\School.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

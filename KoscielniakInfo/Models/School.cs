@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KoscielniakInfo.Models
 {
-    public class Education
+    public class School
     {
  
  
@@ -14,11 +14,14 @@ namespace KoscielniakInfo.Models
         public bool Finished { get; set; }
         public string University { get; set; }
         public string Faculty { get; set; }
+        public string Course { get; set; }
         public string Level { get; set; }
         public double EuGrade { get; set; }
         public string ThesisPromoter { get; set; }
         public string ThesisTitle { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
         public string USGrade
         {
             get

@@ -17,8 +17,8 @@ namespace KoscielniakInfo.Models
         public int Sorting { get; set; }
         public string URL { get; set; }
 
-        public virtual Exprience Expirience { get; set; }
-        public virtual Education Education { get; set; }
+        public virtual Job Expirience { get; set; }
+        public virtual School Education { get; set; }
         public virtual Hobby Hobby { get; set; }
     }
 }
