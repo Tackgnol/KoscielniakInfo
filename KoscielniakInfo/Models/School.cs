@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -20,7 +21,12 @@ namespace KoscielniakInfo.Models
         public string ThesisPromoter { get; set; }
         public string ThesisTitle { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime To { get; set; }
         public string USGrade
         {

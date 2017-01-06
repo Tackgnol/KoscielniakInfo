@@ -1,0 +1,125 @@
+﻿@model KoscielniakInfo.Models.School
+
+@{
+    ViewBag.Title = "Education Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Html.DisplayFor(Model => Model.University) - @Html.DisplayFor(Model=>Model.Faculty)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Completed?
+        </dt>
+
+        <dd>
+            @if (Model.Finished.Equals(true))
+            {
+                <img src="~/Common Images/Completed.png" height="20" width="20" />
+            }
+            else
+            {
+                <img src="~/Common Images/InProgress.jpg" height="20" width="30" />
+            }
+        </dd>
+
+        <dt>
+            Course:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            Finishing Grade:
+        </dt>
+
+        <dd>
+           EU: @Html.DisplayFor(model => model.EuGrade) / US: @Html.DisplayFor(Model=>Model.USGrade)
+        </dd>
+
+        <dt>
+            Thesis Promoter:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThesisPromoter)
+        </dd>
+
+        <dt>
+            Thesis Title:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThesisTitle)
+        </dd>
+
+        <dt>
+            Begin Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            End Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+        <h5>Projects</h5>
+        @foreach (var project in Model.Projects)
+        {
+            <dt>
+                Project Name:
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => project.Name)
+            </dd>
+            <dt>
+                Project Role:
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem=>project.Role)
+            </dd>
+            <dt>
+                Project Description:
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => project.Description)
+            </dd>
+            <dt>
+                Project Result: 
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem=> project.Outcome)
+            </dd>
+
+        }
+
+
+
+    </dl>
+    <h5>Photos</h5>
+    @foreach (var photo in Model.Photos)
+    {
+        <img src=@Url.Content(photo.URL) alt="@photo.Description" height="300" width="400" /><br />
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

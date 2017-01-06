@@ -172,6 +172,20 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
+    <Compile Include="DAL\SchoolsController.cs" />
+    <Compile Include="Migrations\201701042004555_InitialCreate.cs" />
+    <Compile Include="Migrations\201701042004555_InitialCreate.Designer.cs">
+      <DependentUpon>201701042004555_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701062005404_photochange.cs" />
+    <Compile Include="Migrations\201701062005404_photochange.Designer.cs">
+      <DependentUpon>201701062005404_photochange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701062013028_photos2.cs" />
+    <Compile Include="Migrations\201701062013028_photos2.Designer.cs">
+      <DependentUpon>201701062013028_photos2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Certificate.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Job.cs" />
@@ -190,12 +204,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common Images\InProgress.jpg" />
+    <Content Include="Common Images\Completed.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Photos\176410_136549933079638_6573301_o.jpg" />
+    <Content Include="Photos\208476_143911755676789_6012826_n.jpg" />
+    <Content Include="Photos\258432_2132375234788_4920246_o.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -244,6 +263,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Schools\Create.cshtml" />
+    <Content Include="Views\Schools\Delete.cshtml" />
+    <Content Include="Views\Schools\Details.cshtml" />
+    <Content Include="Views\Schools\Edit.cshtml" />
+    <Content Include="Views\Schools\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -255,6 +279,17 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701042004555_InitialCreate.resx">
+      <DependentUpon>201701042004555_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701062005404_photochange.resx">
+      <DependentUpon>201701062005404_photochange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701062013028_photos2.resx">
+      <DependentUpon>201701062013028_photos2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
