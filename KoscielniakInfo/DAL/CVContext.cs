@@ -18,6 +18,7 @@ namespace KoscielniakInfo.DAL
         public DbSet<Project> Projects { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<EUGrade> EuGrades { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

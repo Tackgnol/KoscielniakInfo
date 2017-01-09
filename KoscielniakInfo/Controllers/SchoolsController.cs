@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using KoscielniakInfo.DAL;
 using KoscielniakInfo.Models;
+using System.Data.Entity.Infrastructure;
 
-namespace KoscielniakInfo.DAL
+namespace KoscielniakInfo.Controllers
 {
     public class SchoolsController : Controller
     {
@@ -39,6 +41,7 @@ namespace KoscielniakInfo.DAL
         // GET: Schools/Create
         public ActionResult Create()
         {
+            PopulateGradeDropDownList();
             return View();
         }
 
@@ -47,15 +50,22 @@ namespace KoscielniakInfo.DAL
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Finished,University,Faculty,Course,Level,EuGrade,ThesisPromoter,ThesisTitle,From,To")] School school)
+        public async Task<ActionResult> Create([Bind(Include = "Id,University,Faculty,Course,Level,EuGradeId,ThesisPromoter,ThesisTitle,From,To")] School school)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Schools.Add(school);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Schools.Add(school);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateGradeDropDownList(school.EuGradeId);
             return View(school);
         }
 
@@ -71,23 +81,48 @@ namespace KoscielniakInfo.DAL
             {
                 return HttpNotFound();
             }
+            PopulateGradeDropDownList(school.EuGradeId);
             return View(school);
         }
 
         // POST: Schools/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Finished,University,Faculty,Course,Level,EuGrade,ThesisPromoter,ThesisTitle,From,To")] School school)
+        public async Task<ActionResult> EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id==null)
             {
-                db.Entry(school).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(school);
+            var schoolToUpdate = await db.Schools.FindAsync(id);
+            if (TryUpdateModel(schoolToUpdate, "",new string[]
+                {
+                    "University",
+                    "Faculty",
+                    "Course",
+                    "Level",
+                    "ThesisPromoter",
+                    "ThesisTitle",
+                    "From",
+                    "To",
+                    "EuGradeID"
+                }))
+            {
+                try
+                {
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /*dex*/)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            PopulateGradeDropDownList(schoolToUpdate.EuGradeId);
+            return View(schoolToUpdate);
+
         }
 
         // GET: Schools/Delete/5
@@ -124,5 +159,13 @@ namespace KoscielniakInfo.DAL
             }
             base.Dispose(disposing);
         }
+        private void PopulateGradeDropDownList(object selectedGrade = null)
+        {
+            var gradeQuery = from g in db.EuGrades
+                             orderby g.Id
+                             select g;
+            ViewBag.EuGradeID = new SelectList(gradeQuery, "ID", "Grade", selectedGrade);
+        }
+
     }
 }

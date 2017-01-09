@@ -46,7 +46,7 @@
         </dt>
 
         <dd>
-           EU: @Html.DisplayFor(model => model.EuGrade) / US: @Html.DisplayFor(Model=>Model.USGrade)
+           EU: @Html.DisplayFor(model => model.EuGrade.Grade) / US: @Html.DisplayFor(Model=>Model.USGrade)
         </dd>
 
         <dt>
@@ -114,10 +114,10 @@
 
     </dl>
     <h5>Photos</h5>
-    @foreach (var photo in Model.Photos)
-    {
-        <img src=@Url.Content(photo.URL) alt="@photo.Description" height="300" width="400" /><br />
-    }
+        @foreach (var photo in Model.Photos)
+        {
+            <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a><br />
+        }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

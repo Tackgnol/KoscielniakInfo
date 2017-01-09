@@ -22,8 +22,8 @@ namespace KoscielniakInfo.DAL
 
             var schools = new List<School>
             {
-                new School {University="Uniwersytet Łódzki", Faculty="Ekonomiczno Socjologiczny", Course="Informatyka i Ekonometria", Level="B.A", ThesisPromoter="Dr. Michał Majsterek", ThesisTitle="Metody modelowania modeli ekonometrycznych", Finished=true, EuGrade=5, From=DateTime.Parse("2007-09-31"), To=DateTime.Parse("2010-07-01") },
-                new School {University="Uniwersytet Łódzki", Faculty="Ekonomiczno Socjologiczny", Course="Informatyka i Ekonometria", Level="Magistry", ThesisPromoter="prof. zw. dr hab Jan J. Sztaudynger", ThesisTitle="„Economical and Demographical Causes of Fertility”", Finished=true, EuGrade=4.5, From=DateTime.Parse("2010-09-01"), To=DateTime.Parse("2013-02-01") },
+                new School {University="Uniwersytet Łódzki", Faculty="Ekonomiczno Socjologiczny", Course="Informatyka i Ekonometria", Level="B.A", ThesisPromoter="Dr. Michał Majsterek", ThesisTitle="Metody modelowania modeli ekonometrycznych", From=DateTime.Parse("2007-09-31"), To=DateTime.Parse("2010-07-01") },
+                new School {University="Uniwersytet Łódzki", Faculty="Ekonomiczno Socjologiczny", Course="Informatyka i Ekonometria", Level="Magistry", ThesisPromoter="prof. zw. dr hab Jan J. Sztaudynger", ThesisTitle="„Economical and Demographical Causes of Fertility”", From=DateTime.Parse("2010-09-01"), To=DateTime.Parse("2013-02-01") },
             };
 
             schools.ForEach(j => context.Schools.Add(j));

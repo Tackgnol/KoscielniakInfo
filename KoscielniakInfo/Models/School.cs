@@ -9,59 +9,84 @@ namespace KoscielniakInfo.Models
 {
     public class School
     {
- 
- 
+
+
         public int Id { get; set; }
-        public bool Finished { get; set; }
+        [Display(Name = "University Name")]
         public string University { get; set; }
+        [Display(Name = "Faculty Name")]
         public string Faculty { get; set; }
+        [Display(Name = "Course Name")]
         public string Course { get; set; }
+        [Display(Name = "Education Level")]
         public string Level { get; set; }
-        public double EuGrade { get; set; }
+        [Display(Name = "Thesis Promoter")]
         public string ThesisPromoter { get; set; }
+        [Display(Name = "Thesis Title")]
         public string ThesisTitle { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        [Display(Name = "Started from:")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime From { get; set; }
+        [Display(Name = "Ended:")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime To { get; set; }
+        public int EuGradeId { get; set; }
+        [Display(Name = "European Grade")]
+        public virtual EUGrade EuGrade { get; set; }
+        [Display(Name = "American Grade")]
         public string USGrade
         {
             get
             {
-                string grade = this.EuGrade.ToString();
-                if (this.EuGrade == 5)
+                double euGrade = this.EuGrade.Grade;
+                string usGrade = euGrade.ToString();
+                if (euGrade == 5)
                 {
-                    grade = "A";
+                   usGrade = "A";
                 }
-                else if (this.EuGrade == 4.5)
+                else if (euGrade == 4.5)
                 {
-                    grade = "B+";
+                    usGrade = "B+";
                 }
-                else if (this.EuGrade == 4)
+                else if (euGrade == 4)
                 {
-                    grade = "B";
+                    usGrade = "B";
                 }
-                else if (this.EuGrade == 3.5)
+                else if (euGrade == 3.5)
                 {
-                    grade = "C+";
+                    usGrade = "C+";
                 }
-                else if (this.EuGrade == 3)
+                else if (euGrade == 3)
                 {
-                    grade = "C";
+                    usGrade = "C";
                 }
-                else if (this.EuGrade == 2.5)
+                else if (euGrade == 2.5)
                 {
-                    grade = "D+";
+                    usGrade = "D+";
                 }
-                else if (this.EuGrade == 2)
+                else if (euGrade == 2)
                 {
-                    grade = "D";
+                    usGrade = "D";
                 }
-                return grade;
+                return usGrade;
+            }
+        }
+        public bool Finished
+        {
+            get
+            {
+                if (this.To != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

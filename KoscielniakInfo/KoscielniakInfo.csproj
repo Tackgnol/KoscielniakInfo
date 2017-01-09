@@ -172,7 +172,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
-    <Compile Include="DAL\SchoolsController.cs" />
+    <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="Migrations\201701042004555_InitialCreate.cs" />
     <Compile Include="Migrations\201701042004555_InitialCreate.Designer.cs">
       <DependentUpon>201701042004555_InitialCreate.cs</DependentUpon>
@@ -185,8 +185,29 @@
     <Compile Include="Migrations\201701062013028_photos2.Designer.cs">
       <DependentUpon>201701062013028_photos2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701081125128_finishedChange.cs" />
+    <Compile Include="Migrations\201701081125128_finishedChange.Designer.cs">
+      <DependentUpon>201701081125128_finishedChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701081148345_gradeTable.cs" />
+    <Compile Include="Migrations\201701081148345_gradeTable.Designer.cs">
+      <DependentUpon>201701081148345_gradeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701081211279_euGrade.cs" />
+    <Compile Include="Migrations\201701081211279_euGrade.Designer.cs">
+      <DependentUpon>201701081211279_euGrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701081228391_euGrade1.cs" />
+    <Compile Include="Migrations\201701081228391_euGrade1.Designer.cs">
+      <DependentUpon>201701081228391_euGrade1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701081230234_euGrade2.cs" />
+    <Compile Include="Migrations\201701081230234_euGrade2.Designer.cs">
+      <DependentUpon>201701081230234_euGrade2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Certificate.cs" />
+    <Compile Include="Models\EUGrade.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Global.asax.cs">
@@ -271,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Photos\Miniatures\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -289,6 +311,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701062013028_photos2.resx">
       <DependentUpon>201701062013028_photos2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081125128_finishedChange.resx">
+      <DependentUpon>201701081125128_finishedChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081148345_gradeTable.resx">
+      <DependentUpon>201701081148345_gradeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081211279_euGrade.resx">
+      <DependentUpon>201701081211279_euGrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081228391_euGrade1.resx">
+      <DependentUpon>201701081228391_euGrade1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081230234_euGrade2.resx">
+      <DependentUpon>201701081230234_euGrade2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

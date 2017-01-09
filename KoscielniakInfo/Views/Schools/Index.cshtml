@@ -30,12 +30,6 @@
             @Html.DisplayNameFor(model => model.EuGrade)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ThesisPromoter)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThesisTitle)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.From)
         </th>
         <th>
@@ -62,15 +56,9 @@
             @Html.DisplayFor(modelItem => item.Level)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EuGrade)
+            @Html.DisplayFor(modelItem => item.EuGrade.Grade)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThesisPromoter)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThesisTitle)
-        </td>
-        <td>
+          <td>
             @Html.DisplayFor(modelItem => item.From)
         </td>
         <td>
