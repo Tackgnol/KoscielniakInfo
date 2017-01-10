@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using KoscielniakInfo.DAL;
 using KoscielniakInfo.Models;
 using System.Data.Entity.Infrastructure;
+using KoscielniakInfo.ViewModels;
 
 namespace KoscielniakInfo.Controllers
 {
@@ -81,7 +82,11 @@ namespace KoscielniakInfo.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateAssignedProjects(school);
+            PopulateNullProjects(school);
+            PopulateTakenProjects(school);
             PopulateGradeDropDownList(school.EuGradeId);
+
             return View(school);
         }
 
@@ -92,12 +97,13 @@ namespace KoscielniakInfo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditPost(int? id)
         {
-            if (id==null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var schoolToUpdate = await db.Schools.FindAsync(id);
-            if (TryUpdateModel(schoolToUpdate, "",new string[]
+            if (TryUpdateModel(schoolToUpdate, "", new string[]
                 {
                     "University",
                     "Faculty",
@@ -166,6 +172,68 @@ namespace KoscielniakInfo.Controllers
                              select g;
             ViewBag.EuGradeID = new SelectList(gradeQuery, "ID", "Grade", selectedGrade);
         }
+        private void PopulateAssignedProjects(School school)
+        {
+            var allProjects = db.Projects;
+            var hashSchoolProjects = new HashSet<int>(school.Projects.Select(p => p.Id));
+            var schoolProjects = from p in allProjects
+                                 where p.SchoolID == school.Id
+                                 select p;
+            var viewModel = new List<SelectedProject>();
 
+            foreach (var project in schoolProjects)
+            {
+                viewModel.Add(new SelectedProject
+                {
+                    Id = project.Id,
+                    Title = project.Name,
+                    Selected = hashSchoolProjects.Contains(project.Id)
+                });
+            }
+            ViewBag.AssignedProjects = viewModel;
+        }
+        private void PopulateNullProjects(School school)
+        {
+            var allProjects = db.Projects;
+            var hashSchoolProjects = new HashSet<int>(school.Projects.Select(p => p.Id));
+            var schoolProjects = from p in allProjects
+                                 where p.SchoolID == null
+                                 select p;
+            var viewModel = new List<SelectedProject>();
+            foreach (var project in schoolProjects)
+            {
+                viewModel.Add(new SelectedProject
+                {
+                    Id = project.Id,
+                    Title = project.Name,
+                    Selected = hashSchoolProjects.Contains(project.Id)
+                });
+            }
+
+            ViewBag.FreeProjects = viewModel;
+        }
+
+        private void PopulateTakenProjects(School school)
+        {
+            var allProjects = db.Projects;
+            var hashSchoolProjects = new HashSet<int>(school.Projects.Select(p => p.Id));
+            var schoolProjects = from p in allProjects
+                                 where p.SchoolID != school.Id && p.SchoolID != null
+                                 select p;
+            var viewModel = new List<SelectedProject>();
+            foreach (var project in schoolProjects)
+            {
+                viewModel.Add(new SelectedProject
+                {
+                    Id = project.Id,
+                    Title = project.Name,
+                    Selected = hashSchoolProjects.Contains(project.Id)
+                });
+            }
+            ViewBag.OtherProjects = viewModel;
+        }
     }
+
 }
+
+

@@ -14,6 +14,8 @@ namespace KoscielniakInfo.Models
         public string Description { get; set; }
         public string Outcome { get; set; }
         public string PortfolioLink { get; set; }
+        public int? SchoolID { get; set; }
+        public int? JobId { get; set; }
 
     }
 }
