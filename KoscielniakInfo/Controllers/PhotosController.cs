@@ -209,7 +209,7 @@ namespace KoscielniakInfo.Controllers
             var allPhotos = from p in db.Photos
                             select p.PhotoID;
             List<int> Numbers = new List<int>();
-            for (int i = 1; i <= allPhotos.Count(); i++)
+            for (int i = 1; i <= allPhotos.Count()+1; i++)
             {
                 Numbers.Add(i);
             }
@@ -220,18 +220,20 @@ namespace KoscielniakInfo.Controllers
             if (Request.Files.Count > 0)
             {
                 var file = Request.Files[0];
-
                 if (file != null &&
                     file.ContentLength > 0 &&
                     file.ContentType.Contains("image"
                     ))
                 {
-                    string fileName = "CVImage" + String.Format("{0:D5}", db.Photos.Count());
+                    string extension = Path.GetExtension(file.FileName.ToString().ToLower());
+                    string fileName = "CVImage" + String.Format("{0:D5}", db.Photos.Count()) + extension;
                     var path = Path.Combine(Server.MapPath("~/Photos/"), fileName);
                     file.SaveAs(path);
                     Image imageToResize = Image.FromFile(path);
                     Bitmap resizedImage = ResizeImage(imageToResize, 200, 133);
                     resizedImage.Save(Path.Combine(Server.MapPath("~/Photos/Miniatures/"), fileName));
+                    imageToResize.Dispose();
+                    resizedImage.Dispose();
                     return fileName;
                 }
 
