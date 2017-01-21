@@ -38,6 +38,15 @@ namespace KoscielniakInfo.Models
         [Display(Name = "European Grade")]
         public virtual EUGrade EuGrade { get; set; }
         [Display(Name = "American Grade")]
+
+        public string DisplayName
+        {
+            get
+            {
+                return Level + ": " + Course;
+            }
+        }
+
         public string USGrade
         {
             get

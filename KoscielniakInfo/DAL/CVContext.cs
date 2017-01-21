@@ -24,5 +24,7 @@ namespace KoscielniakInfo.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<KoscielniakInfo.Models.Hobby> Hobbies { get; set; }
     }
 }

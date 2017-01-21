@@ -17,6 +17,14 @@ namespace KoscielniakInfo.Models
         public string WikipediaCompanyName { get; set; }
         public string Description { get; set; }
         public virtual ICollection<Project> Projects {get; set;}
+
+        public string DisplayName
+        {
+            get
+            {
+                return CompanyName + " - " + Position;
+            }
+        }
         
     }
 }

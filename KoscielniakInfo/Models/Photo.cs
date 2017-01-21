@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,8 +9,11 @@ namespace KoscielniakInfo.Models
     public class Photo
     {
         public int PhotoID { get; set; }
+        [Display(Name ="Assigned To Job")]
         public int? JobID { get; set; }
+        [Display(Name = "Assigned To School")]
         public int? SchoolID { get; set; }
+        [Display(Name = "Assigned To Hobby")]
         public int? HobbyID { get; set; }
 
         public string Title { get; set; }

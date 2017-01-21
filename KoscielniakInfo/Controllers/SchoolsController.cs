@@ -11,6 +11,7 @@ using KoscielniakInfo.DAL;
 using KoscielniakInfo.Models;
 using System.Data.Entity.Infrastructure;
 using KoscielniakInfo.ViewModels;
+using System.IO;
 
 namespace KoscielniakInfo.Controllers
 {
@@ -43,6 +44,10 @@ namespace KoscielniakInfo.Controllers
         public ActionResult Create()
         {
             PopulateGradeDropDownList();
+            var school = new School();
+            school.Projects = new List<Project>();
+            PopulateNullProjects(school);
+            PopulateTakenProjects(school);
             return View();
         }
 
@@ -51,8 +56,17 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,University,Faculty,Course,Level,EuGradeId,ThesisPromoter,ThesisTitle,From,To")] School school)
+        public async Task<ActionResult> Create([Bind(Include = "Id,University,Faculty,Course,Level,EuGradeId,ThesisPromoter,ThesisTitle,From,To")] School school, string[] selectedProjects)
         {
+            if (selectedProjects != null)
+            {
+                school.Projects = new List<Project>();
+                foreach (var project in selectedProjects)
+                {
+                    var projectToAdd = await db.Projects.FindAsync(int.Parse(project));
+                    school.Projects.Add(projectToAdd);
+                }
+            }
             try
             {
                 if (ModelState.IsValid)
@@ -67,6 +81,9 @@ namespace KoscielniakInfo.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
             PopulateGradeDropDownList(school.EuGradeId);
+            PopulateAssignedProjects(school);
+            PopulateNullProjects(school);
+            PopulateTakenProjects(school);
             return View(school);
         }
 
@@ -95,14 +112,17 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditPost(int? id)
+        public async Task<ActionResult> Edit(int? id, string[] selectedProjects)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var schoolToUpdate = await db.Schools.FindAsync(id);
+            var schoolToUpdate = db.Schools
+                .Include(p => p.Projects)
+                .Where(p => p.Id == id)
+                .Single();
             if (TryUpdateModel(schoolToUpdate, "", new string[]
                 {
                     "University",
@@ -118,6 +138,7 @@ namespace KoscielniakInfo.Controllers
             {
                 try
                 {
+                    UpdateSchoolProjects(selectedProjects, schoolToUpdate);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -127,6 +148,9 @@ namespace KoscielniakInfo.Controllers
                 }
             }
             PopulateGradeDropDownList(schoolToUpdate.EuGradeId);
+            PopulateAssignedProjects(schoolToUpdate);
+            PopulateNullProjects(schoolToUpdate);
+            PopulateTakenProjects(schoolToUpdate);
             return View(schoolToUpdate);
 
         }
@@ -153,6 +177,17 @@ namespace KoscielniakInfo.Controllers
         {
             School school = await db.Schools.FindAsync(id);
             db.Schools.Remove(school);
+            var projects = db.Projects
+                .Where(d => d.SchoolID == id);
+
+            foreach (var project in projects )
+            {
+                if (project != null)
+                {
+                    project.SchoolID = null;
+                }
+            }
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -165,6 +200,9 @@ namespace KoscielniakInfo.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
         private void PopulateGradeDropDownList(object selectedGrade = null)
         {
             var gradeQuery = from g in db.EuGrades
@@ -232,7 +270,37 @@ namespace KoscielniakInfo.Controllers
             }
             ViewBag.OtherProjects = viewModel;
         }
+ 
+        private void UpdateSchoolProjects(string[] selectedProjects, School schoolToUpdate)
+        {
+            if (selectedProjects == null)
+            {
+                schoolToUpdate.Projects = new List<Project>();
+                return;
+            }
+            var selectedProjectsHS = new HashSet<string>(selectedProjects);
+            var schoolProjects = new HashSet<int>
+                (schoolToUpdate.Projects.Select(p => p.Id));
+            foreach (var project in db.Projects)
+            {
+                if (selectedProjectsHS.Contains(project.Id.ToString()))
+                {
+                    if (!schoolProjects.Contains(project.Id))
+                    {
+                        schoolToUpdate.Projects.Add(project);
+                    }
+                }
+                else
+                {
+                    if (schoolProjects.Contains(project.Id))
+                    {
+                        schoolToUpdate.Projects.Remove(project);
+                    }
+                }
+            }
+        }
     }
+    
 
 }
 

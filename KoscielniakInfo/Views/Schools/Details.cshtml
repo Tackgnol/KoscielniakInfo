@@ -4,14 +4,22 @@
     ViewBag.Title = "Education Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>@Html.DisplayFor(Model => Model.University) - @Html.DisplayFor(Model=>Model.Faculty)</h4>
+    <h2>@Html.DisplayFor(Model => Model.University) - @Html.DisplayFor(Model => Model.Faculty)</h2>
+    @*@if (Context.User.Identity.IsAuthenticated)
+    {*@
+    <p>
+        <h4>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </h4>
+    </p>
+    @*}*@
     <hr />
+    <h3>Basic Information</h3>
     <dl class="dl-horizontal">
         <dt>
-           Completed?
+            Completed?
         </dt>
 
         <dd>
@@ -46,7 +54,7 @@
         </dt>
 
         <dd>
-           EU: @Html.DisplayFor(model => model.EuGrade.Grade) / US: @Html.DisplayFor(Model=>Model.USGrade)
+            EU: @Html.DisplayFor(model => model.EuGrade.Grade) / US: @Html.DisplayFor(Model => Model.USGrade)
         </dd>
 
         <dt>
@@ -80,9 +88,13 @@
         <dd>
             @Html.DisplayFor(model => model.To)
         </dd>
-        <h5>Projects</h5>
-        @foreach (var project in Model.Projects)
-        {
+    </dl>
+    <hr />
+    <hr />
+    <h3>Projects</h3>
+    @foreach (var project in Model.Projects)
+    {
+        <dl class="dl-horizontal">
             <dt>
                 Project Name:
             </dt>
@@ -93,7 +105,7 @@
                 Project Role:
             </dt>
             <dd>
-                @Html.DisplayFor(modelItem=>project.Role)
+                @Html.DisplayFor(modelItem => project.Role)
             </dd>
             <dt>
                 Project Description:
@@ -102,24 +114,26 @@
                 @Html.DisplayFor(modelItem => project.Description)
             </dd>
             <dt>
-                Project Result: 
+                Project Result:
             </dt>
             <dd>
-                @Html.DisplayFor(modelItem=> project.Outcome)
+                @Html.DisplayFor(modelItem => project.Outcome)
             </dd>
+        </dl>
+        <hr />
+    }
+    <hr />
+    <h3>Photos</h3>
 
-        }
-
-
-
-    </dl>
-    <h5>Photos</h5>
-        @foreach (var photo in Model.Photos)
-        {
-            <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a><br />
-        }
+    @foreach (var photo in Model.Photos)
+    {
+        int i = 0;
+        <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a>
+        if (i%3==0 && i>=3)
+	    {
+		   <br/>
+	    }
+        i++;
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
