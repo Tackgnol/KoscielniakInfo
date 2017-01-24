@@ -19,12 +19,12 @@ namespace KoscielniakInfo.DAL
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<EUGrade> EuGrades { get; set; }
+        public DbSet<Hobby> Hobbies { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public System.Data.Entity.DbSet<KoscielniakInfo.Models.Hobby> Hobbies { get; set; }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<KoscielniakInfo.Models.Skill>
+
+@{
+    ViewBag.Title = "Skills";
+}
+
+<h2>Skills</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    @foreach (var skillGroup in ViewBag.GroupedSkills)
+    {
+        <tr>
+            <td>
+                <b> @skillGroup.Key</b>
+            </td>
+            <td>
+                @foreach (var item in skillGroup.Value)
+                {
+                    <ul class="list-group">
+                        <li>
+                            @item.Name - @item.SkillLevel
+                        </li>
+                    </ul>
+                }
+            </td>
+
+        </tr>
+    }
+</table>
+

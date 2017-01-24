@@ -168,9 +168,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CertificatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
@@ -209,6 +212,34 @@
     <Compile Include="Migrations\201701101927344_ProjectUpdate.cs" />
     <Compile Include="Migrations\201701101927344_ProjectUpdate.Designer.cs">
       <DependentUpon>201701101927344_ProjectUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701211418285_Skill.cs" />
+    <Compile Include="Migrations\201701211418285_Skill.Designer.cs">
+      <DependentUpon>201701211418285_Skill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701220936585_Certificates.cs" />
+    <Compile Include="Migrations\201701220936585_Certificates.Designer.cs">
+      <DependentUpon>201701220936585_Certificates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701220958038_Certificates1.cs" />
+    <Compile Include="Migrations\201701220958038_Certificates1.Designer.cs">
+      <DependentUpon>201701220958038_Certificates1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701221009099_Certificates2.cs" />
+    <Compile Include="Migrations\201701221009099_Certificates2.Designer.cs">
+      <DependentUpon>201701221009099_Certificates2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701221148404_seedingTrials1.cs" />
+    <Compile Include="Migrations\201701221148404_seedingTrials1.Designer.cs">
+      <DependentUpon>201701221148404_seedingTrials1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701221221057_isCertificate.cs" />
+    <Compile Include="Migrations\201701221221057_isCertificate.Designer.cs">
+      <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701242006557_job-update.cs" />
+    <Compile Include="Migrations\201701242006557_job-update.Designer.cs">
+      <DependentUpon>201701242006557_job-update.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Certificate.cs" />
@@ -300,6 +331,22 @@
     <Content Include="Views\Photos\Details.cshtml" />
     <Content Include="Views\Photos\Edit.cshtml" />
     <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Skills\Create.cshtml" />
+    <Content Include="Views\Skills\Delete.cshtml" />
+    <Content Include="Views\Skills\Details.cshtml" />
+    <Content Include="Views\Skills\Edit.cshtml" />
+    <Content Include="Views\Skills\Index.cshtml" />
+    <Content Include="Views\Skills\Admin.cshtml" />
+    <Content Include="Views\Certificates\Create.cshtml" />
+    <Content Include="Views\Certificates\Delete.cshtml" />
+    <Content Include="Views\Certificates\Details.cshtml" />
+    <Content Include="Views\Certificates\Edit.cshtml" />
+    <Content Include="Views\Certificates\Index.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Delete.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,6 +387,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701101927344_ProjectUpdate.resx">
       <DependentUpon>201701101927344_ProjectUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701211418285_Skill.resx">
+      <DependentUpon>201701211418285_Skill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701220936585_Certificates.resx">
+      <DependentUpon>201701220936585_Certificates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701220958038_Certificates1.resx">
+      <DependentUpon>201701220958038_Certificates1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701221009099_Certificates2.resx">
+      <DependentUpon>201701221009099_Certificates2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701221148404_seedingTrials1.resx">
+      <DependentUpon>201701221148404_seedingTrials1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701221221057_isCertificate.resx">
+      <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701242006557_job-update.resx">
+      <DependentUpon>201701242006557_job-update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

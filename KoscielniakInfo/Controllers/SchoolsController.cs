@@ -180,14 +180,22 @@ namespace KoscielniakInfo.Controllers
             var projects = db.Projects
                 .Where(d => d.SchoolID == id);
 
-            foreach (var project in projects )
+            foreach (var project in projects)
             {
                 if (project != null)
                 {
                     project.SchoolID = null;
                 }
             }
-
+            var photos = db.Photos
+            .Where(p => p.SchoolID == id);
+            foreach (var photo in photos)
+            {
+                if (photo != null)
+                {
+                    photo.SchoolID = null;
+                }
+            }
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -270,7 +278,7 @@ namespace KoscielniakInfo.Controllers
             }
             ViewBag.OtherProjects = viewModel;
         }
- 
+
         private void UpdateSchoolProjects(string[] selectedProjects, School schoolToUpdate)
         {
             if (selectedProjects == null)
@@ -300,7 +308,7 @@ namespace KoscielniakInfo.Controllers
             }
         }
     }
-    
+
 
 }
 

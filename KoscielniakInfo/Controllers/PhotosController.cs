@@ -53,6 +53,7 @@ namespace KoscielniakInfo.Controllers
             PopulateJobs(photo.JobID);
             PopulateSchools(photo.SchoolID);
             PopulateHobbies(photo.HobbyID);
+            PopulateCertificates(photo.CertificateID);
             PopulateSortingNumbers(photo.Sorting);
             return View();
         }
@@ -62,7 +63,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PhotoID,JobID,SchoolID,HobbyID,Title,Description,Sorting,URL")] Photo photo)
+        public async Task<ActionResult> Create([Bind(Include = "PhotoID,JobID,SchoolID,HobbyID,CertificateID,Title,Description,Sorting,URL,isCertificate")] Photo photo)
         {
             if (ModelState.IsValid)
             {
@@ -75,6 +76,7 @@ namespace KoscielniakInfo.Controllers
             PopulateJobs(photo.JobID);
             PopulateSchools(photo.SchoolID);
             PopulateHobbies(photo.HobbyID);
+            PopulateCertificates(photo.CertificateID);
             PopulateSortingNumbers(photo.Sorting);
             return View(photo);
         }
@@ -95,6 +97,7 @@ namespace KoscielniakInfo.Controllers
             PopulateJobs(photo.JobID);
             PopulateSchools(photo.SchoolID);
             PopulateHobbies(photo.HobbyID);
+            PopulateCertificates(photo.CertificateID);
             PopulateSortingNumbers(photo.Sorting);
             return View(photo);
         }
@@ -114,6 +117,7 @@ namespace KoscielniakInfo.Controllers
                 .Include(h => h.Hobby)
                 .Include(j => j.Job)
                 .Include(s => s.School)
+                .Include(c=>c.Certificate)
                 .Where(p => p.PhotoID == Id)
                 .Single();
 
@@ -125,6 +129,7 @@ namespace KoscielniakInfo.Controllers
                     "JobID",
                     "HobbyID",
                     "SchoolID",
+                    "CertificateID",
                     "Sorting",
                     "URL"
                 }))
@@ -142,6 +147,7 @@ namespace KoscielniakInfo.Controllers
             PopulateJobs(photoToUpdate.JobID);
             PopulateSchools(photoToUpdate.SchoolID);
             PopulateHobbies(photoToUpdate.HobbyID);
+            PopulateCertificates(photoToUpdate.CertificateID);
             PopulateSortingNumbers(photoToUpdate.Sorting);
             return View(photoToUpdate);
 
@@ -204,6 +210,14 @@ namespace KoscielniakInfo.Controllers
                             select s;
             ViewBag.SchoolID = new SelectList(allShools, "Id", "DisplayName", selectedSchool);
         }
+        private void PopulateCertificates(object selectedCertificate = null)
+        {
+            var allCertificates = from c in db.Certificates
+                            orderby c.ID
+                            select c;
+            ViewBag.CertificateID = new SelectList(allCertificates, "Id", "Name", selectedCertificate);
+        }
+
         private void PopulateSortingNumbers(object selectedSorting = null)
         {
             var allPhotos = from p in db.Photos

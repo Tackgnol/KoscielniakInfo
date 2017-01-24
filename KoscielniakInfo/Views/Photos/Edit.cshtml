@@ -17,6 +17,13 @@
         <hr />
         @Html.HiddenFor(model => model.PhotoID)
         @Html.HiddenFor(model => model.URL)
+        <div class="form-group">
+            @Html.LabelFor(model => model.isCertificate, "Certificate?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBox("isCertificate", false, new { @class = "checkbox" })
+                @Html.ValidationMessageFor(model => model.isCertificate, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <dl class="dl-horizontal">
             <dt>
                 @Html.LabelFor(model=>model.Title, htmlAttributes: new { @class = "control-label" })
@@ -50,6 +57,12 @@
             </dt>
             <dd>
                 @Html.DropDownList("HobbyID", String.Empty)
+            </dd>
+            <dt>
+                @Html.LabelFor(model => model.CertificateID, htmlAttributes: new { @class = "control-label" })
+            </dt>
+            <dd>
+                @Html.DropDownList("CertificateID", String.Empty)
             </dd>
             <dt>
                 @Html.LabelFor(model => model.Sorting, htmlAttributes: new { @class = "control-label" })

@@ -15,14 +15,16 @@ namespace KoscielniakInfo.Models
         public int? SchoolID { get; set; }
         [Display(Name = "Assigned To Hobby")]
         public int? HobbyID { get; set; }
-
+        [Display(Name ="Certificate for")]
+        public int? CertificateID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int? Sorting { get; set; }
         public string URL { get; set; }
-
+        public bool? isCertificate { get; set; }
         public virtual Job Job { get; set; }
         public virtual School School { get; set; }
         public virtual Hobby Hobby { get; set; }
+        public virtual Certificate Certificate { get; set; }
     }
 }

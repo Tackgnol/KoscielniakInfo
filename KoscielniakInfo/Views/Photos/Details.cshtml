@@ -47,7 +47,17 @@
                 @Html.DisplayFor(model => model.Hobby.Title)
             </dd>
         }
+        @if (Model.CertificateID!=null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model=>model.CertificateID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model=>model.Certificate.Name)
+            </dd>
+        }
         </dl>
+
         <hr />
         <a href="~/Photos/@Model.URL"><img src="~/Photos/Miniatures/@Model.URL" alt="@Model.Description" /></a>
         <hr />
