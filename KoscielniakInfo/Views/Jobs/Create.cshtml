@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Job</h4>
         <hr />
@@ -70,14 +70,42 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-10">
 
+                <h2>Project not assigned to any job:</h2>
+                @{
+                    List<KoscielniakInfo.ViewModels.SelectedProject> projects = ViewBag.FreeProjects;
+                    foreach (var project in projects)
+                    {
+                        <input type="checkbox"
+                               name="selectedProjects"
+                               value="@project.Id"
+                               @Html.Raw(project.Selected ? "checked=\"checked\"" : "") ) />
+                            <p> @project.Id - @project.Title</p>
+
+                    }
+                }
+                <h2>Projects assigned to other jobs</h2>
+                @{
+                    projects = ViewBag.OtherProjects;
+                    foreach (var project in projects)
+                    {
+                        <input type="checkbox"
+                               name="selectedProjects"
+                               value="@project.Id"
+                               @Html.Raw(project.Selected ? "checked=\"checked\"" : "") ) />
+                    }
+                }
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")

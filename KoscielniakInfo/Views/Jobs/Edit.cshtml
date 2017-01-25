@@ -78,6 +78,47 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h2>Projects assigned to this job:</h2>
+                @{ 
+                    List<KoscielniakInfo.ViewModels.SelectedProject> projects = ViewBag.AssignedProjects;
+                    foreach (var project in projects)
+                    {
+                        <input type="checkbox"
+                               name="selectedProjects"
+                               value="@project.Id"
+                               @(Html.Raw(project.Selected ? "checked=\"checked\"" : "")) />
+                               <p>@project.Id -  @project.Title</p>
+                    }
+
+                }
+                <h2>Project not assigned to any job:</h2>
+                @{ 
+                    projects = ViewBag.FreeProjects;
+                    foreach (var project in projects)
+                    {
+                        <input type="checkbox"
+                               name="selectedProjects"
+                               value="@project.Id"
+                               @Html.Raw(project.Selected ? "checked=\"checked\"": "")) />
+                               <p> @project.Id - @project.Title</p>
+
+                    }
+                }
+                <h2>Projects assigned to other jobs</h2>
+                @{
+                    projects = ViewBag.OtherProjects;
+                    foreach (var project in projects)
+                    {
+                        <input type="checkbox"
+                               name="selectedProjects"
+                               value="@project.Id"
+                               @Html.Raw(project.Selected ? "checked=\"checked\"": "") ) />
+                    }
+                }
+            </div>
+        </div>
     </div>
 }
 

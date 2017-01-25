@@ -41,6 +41,10 @@ namespace KoscielniakInfo.Controllers
         // GET: Jobs/Create
         public ActionResult Create()
         {
+            var job = new Job();
+            job.Projects = new List<Project>();
+            PopulateNullProjects(job);
+            PopulateTakenProjects(job);
             return View();
         }
 
@@ -49,15 +53,26 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "id,CompanyName,Role,Position,StartDate,EndDate,WikipediaCompanyName,Description")] Job job)
+        public async Task<ActionResult> Create([Bind(Include = "id,CompanyName,Role,Position,StartDate,EndDate,WikipediaCompanyName,Description")] Job job, string[] selectedProjects)
         {
+            if (selectedProjects != null)
+            {
+                job.Projects = new List<Project>();
+                foreach (var project in selectedProjects)
+                {
+                    var projectToAdd =await db.Projects.FindAsync(int.Parse(project));
+                    job.Projects.Add(projectToAdd);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Jobs.Add(job);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
+            PopulateNullProjects(job);
+            PopulateTakenProjects(job);
+            
             return View(job);
         }
 
@@ -73,6 +88,9 @@ namespace KoscielniakInfo.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateAssignedProjects(job);
+            PopulateNullProjects(job);
+            PopulateTakenProjects(job);
             return View(job);
         }
 
@@ -81,15 +99,27 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "id,CompanyName,Role,Position,StartDate,EndDate,WikipediaCompanyName,Description")] Job job)
+        public async Task<ActionResult> Edit(int? id, string[] selectedProjects)
         {
-            if (ModelState.IsValid)
+            if (id==null)
             {
-                db.Entry(job).State = EntityState.Modified;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var jobToUpdate = db.Jobs
+                .Include(p => p.Projects)
+                .Where(p => p.id == id)
+                .Single();
+
+            // "id,CompanyName,Role,Position,StartDate,EndDate,WikipediaCompanyName,Description"
+            if (TryUpdateModel(jobToUpdate, "",new string[] { "CompanyName", "Role", "Position", "StartDate", "EndDate", "WikipediaCompanyName", "Description" }))
+            {
+                UpdateJobProjects(selectedProjects, jobToUpdate);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(job);
+            PopulateTakenProjects(jobToUpdate);
+            PopulateNullProjects(jobToUpdate);
+            return View(jobToUpdate);
         }
 
         // GET: Jobs/Delete/5
@@ -167,12 +197,12 @@ namespace KoscielniakInfo.Controllers
             ViewBag.FreeProjects = viewModel;
         }
 
-        private void PopulateTakenProjects(School school)
+        private void PopulateTakenProjects(Job job)
         {
             var allProjects = db.Projects;
-            var hashJobProjects = new HashSet<int>(school.Projects.Select(p => p.Id));
+            var hashJobProjects = new HashSet<int>(job.Projects.Select(p => p.Id));
             var jobProjects = from p in allProjects
-                                 where p.SchoolID != school.Id && p.SchoolID != null
+                                 where p.SchoolID != job.id && p.SchoolID != null
                                  select p;
             var viewModel = new List<SelectedProject>();
             foreach (var project in jobProjects)
@@ -186,5 +216,38 @@ namespace KoscielniakInfo.Controllers
             }
             ViewBag.OtherProjects = viewModel;
         }
+        private void UpdateJobProjects(string[] selectedProjects, Job jobToUpdate)
+        {
+            if (selectedProjects == null)
+            {
+                jobToUpdate.Projects = new List<Project>();
+                return;
+            }
+            var selectedProjectsHS = new HashSet<string>(selectedProjects);
+            var jobProjects = new HashSet<int>
+                (jobToUpdate.Projects.Select(p => p.Id));
+
+            foreach (var project in db.Projects)
+            {
+                if (selectedProjectsHS.Contains(project.Id.ToString()))
+                {
+                    if (!jobProjects.Contains(project.Id))
+                    {
+                        jobToUpdate.Projects.Add(project);
+                    }
+                }
+                else
+                {
+                    if (jobProjects.Contains(project.Id))
+                    {
+                        jobToUpdate.Projects.Remove(project);
+                    }
+                }
+
+            }
+
+        }
     }
+
+    
 }
