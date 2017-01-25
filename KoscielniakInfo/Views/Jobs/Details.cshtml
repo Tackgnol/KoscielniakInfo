@@ -67,24 +67,35 @@
         </dd>
         </dl>
     <hr />
-       <dl>
+    <h3>
+        Projects in this job
+    </h3>
         @foreach (var project in Model.Projects)
         {
-            
-            <dt>
-                Project Name - Role
-            </dt>
-            <dd>
-                @project.Name - @project.Role
-            </dd>
-            <dt>
-                Project Description
-            </dt>
-            <dd>
+
+
+            <p>
+
+                <b>@project.Name - @project.Role</b>
+
+                <br />
+
                 @project.Description
-            </dd>
+            </p>
+            <hr />
         }
-    </dl>
+ 
+        <h3>Photos</h3>
+
+        @foreach (var photo in Model.Photos)
+        {
+            int i = 0;
+            <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a>
+            if (i % 3 == 0 && i >= 3)
+            {
+                <br />   }
+            i++;
+        }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
