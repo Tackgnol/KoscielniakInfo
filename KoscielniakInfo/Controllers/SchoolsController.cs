@@ -41,6 +41,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Schools/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             PopulateGradeDropDownList();

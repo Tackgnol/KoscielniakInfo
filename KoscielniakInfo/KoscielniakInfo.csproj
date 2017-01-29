@@ -169,10 +169,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CertificatesController.cs" />
+    <Compile Include="Controllers\CVController.cs" />
+    <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
@@ -237,12 +240,13 @@
     <Compile Include="Migrations\201701221221057_isCertificate.Designer.cs">
       <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701242006557_job-update.cs" />
-    <Compile Include="Migrations\201701242006557_job-update.Designer.cs">
-      <DependentUpon>201701242006557_job-update.cs</DependentUpon>
+    <Compile Include="Migrations\201701281001077_projectFix.cs" />
+    <Compile Include="Migrations\201701281001077_projectFix.Designer.cs">
+      <DependentUpon>201701281001077_projectFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Certificate.cs" />
+    <Compile Include="ViewModels\CV.cs" />
     <Compile Include="Models\EUGrade.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\Job.cs" />
@@ -347,6 +351,17 @@
     <Content Include="Views\Jobs\Details.cshtml" />
     <Content Include="Views\Jobs\Edit.cshtml" />
     <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\CV\Index.cshtml" />
+    <Content Include="Views\Hobbies\Create.cshtml" />
+    <Content Include="Views\Hobbies\Delete.cshtml" />
+    <Content Include="Views\Hobbies\Details.cshtml" />
+    <Content Include="Views\Hobbies\Edit.cshtml" />
+    <Content Include="Views\Hobbies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -406,8 +421,8 @@
     <EmbeddedResource Include="Migrations\201701221221057_isCertificate.resx">
       <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701242006557_job-update.resx">
-      <DependentUpon>201701242006557_job-update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701281001077_projectFix.resx">
+      <DependentUpon>201701281001077_projectFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

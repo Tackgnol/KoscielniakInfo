@@ -1,0 +1,45 @@
+﻿@model KoscielniakInfo.Models.Hobby
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hobby</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+    <h3>Photos</h3>
+
+    @foreach (var photo in Model.Photos)
+    {
+        int i = 0;
+        <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a>
+        if (i % 3 == 0 && i >= 3)
+        {
+            <br />   }
+        i++;
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

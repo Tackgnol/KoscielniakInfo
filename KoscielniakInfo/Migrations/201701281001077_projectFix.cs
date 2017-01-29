@@ -3,7 +3,7 @@ namespace KoscielniakInfo.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class jobupdate : DbMigration
+    public partial class projectFix : DbMigration
     {
         public override void Up()
         {

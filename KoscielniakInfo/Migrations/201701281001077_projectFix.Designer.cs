@@ -7,13 +7,13 @@ namespace KoscielniakInfo.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class jobupdate : IMigrationMetadata
+    public sealed partial class projectFix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(jobupdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(projectFix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701242006557_job-update"; }
+            get { return "201701281001077_projectFix"; }
         }
         
         string IMigrationMetadata.Source

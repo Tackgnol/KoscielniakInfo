@@ -1,0 +1,193 @@
+﻿@model KoscielniakInfo.ViewModels.CV
+@{
+    ViewBag.Title = "My Virtual CV";
+}
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+
+        function ShowHideElementJQ(pID, spanID) {
+            $(document.getElementById(pID)).toggle(500);
+            $(document.getElementById(spanID)).toggleClass("glyphicon-chevron-up glyphicon-chevron-down")
+        }
+    </script>
+}
+<h2>Expirience</h2>
+<hr />
+<div class="container">
+    @foreach (var item in Model.Jobs)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-center">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.StartDate) <br />
+                        —<br />
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </b>
+                </p>
+            </div>
+            <div class="col-md-7">
+                <p class="text-left">
+                    <b>@Html.DisplayFor(modelItem => item.CompanyName) </b><br />
+                    <b>@Html.DisplayFor(modelItem => item.Role)</b> <br />
+                    @Html.DisplayFor(modelItem => item.Description)
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-9">
+                    <h4 onclick='ShowHideElementJQ("divJob+@item.id", "iJob+@item.id")'>
+                        <i>Projects</i>
+                        <i id="iJob+@item.id" class="glyphicon glyphicon-chevron-down"></i>
+                    </h4>
+                    <div class=row id="divJob+@item.id" style="display:none">
+                        @foreach (var subItem in item.Projects)
+                        {
+                            <p onclick='ShowHideElementJQ("divJobProject+@subItem.Id", "iJobProject+@subItem.Id")'><b>@Html.DisplayFor(modelItem => subItem.Name)</b><i id="iJobProject+@subItem.Id" class="glyphicon glyphicon-chevron-down"></i></p>
+                            <div id="divJobProject+@subItem.Id" class="row" style="display:none">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="text-right">
+                                            @Html.LabelFor(modelItem => subItem.Role)
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(modelItem => subItem.Role)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="text-right">
+                                            @Html.LabelFor(modelItem => subItem.Description)
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.DisplayFor(modelItem => subItem.Description)
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+
+
+</div>
+
+
+
+<h2>Education</h2>
+<hr />
+<div class="container">
+    @foreach (var item in Model.Schools)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-center">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.From) <br />
+                        —<br />
+                        @Html.DisplayFor(modelItem => item.To)
+                    </b>
+                </p>
+            </div>
+            <div class="col-md-7">
+                <p class="text-left">
+                    <b>@Html.DisplayFor(modelItem => item.University) — @Html.DisplayFor(modelItem => item.Faculty) </b> <br />
+                    <b>@Html.DisplayFor(modelItem => item.DisplayName) </b><br />
+
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+
+</div>
+<h2>Skills</h2>
+<hr />
+<div class="container">
+    @foreach (var skillGroup in ViewBag.GroupedSkills)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <b> @skillGroup.Key</b>
+            </div>
+            <div class="col-md-7">
+                @foreach (var item in skillGroup.Value)
+                {
+                    <ul class="list-group">
+                        <li>
+                            @item.Name - @item.SkillLevel
+                        </li>
+                    </ul>
+                }
+
+            </div>
+        </div>
+        <br />
+    }
+</div>
+<h2>Certificates</h2>
+<hr />
+<div class="container">
+    @foreach (var item in Model.Certificates)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-center">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.StartDate) <br />
+                        —<br />
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </b>
+                </p>
+            </div>
+            <div class="col-md-7">
+                <p class="text-left">
+                    <b>@Html.DisplayFor(modelItem => item.CompanyName) — @Html.DisplayFor(modelItem => item.Name) </b> <br />
+                    @Html.DisplayFor(modelItem => item.TeacherName)
+
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+
+</div>
+<h2>Hobbies</h2>
+<hr />
+<div class="container">
+    @foreach (var item in Model.Hobbies)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <p class="text-left">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.Title) <br />
+                    </b>
+                </p>
+            </div>
+            <div class="col-md-7">
+                <p class="text-left">
+                    @Html.DisplayFor(modelItem => item.Description)
+
+                </p>
+            </div>
+        </div>
+        <br />
+    }
+
+</div>
+
+
