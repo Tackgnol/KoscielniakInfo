@@ -16,7 +16,9 @@ namespace KoscielniakInfo.Controllers
         public ActionResult Index()
         {
             CV allTypes = new CV();
-            allTypes.Jobs = db.Jobs.ToList();
+            allTypes.Jobs = db.Jobs
+                .OrderByDescending(j=>j.StartDate)
+                .ToList();
             allTypes.Schools = db.Schools.ToList();
             allTypes.Certificates = db.Certificates.ToList();
             allTypes.Hobbies = db.Hobbies.ToList();
