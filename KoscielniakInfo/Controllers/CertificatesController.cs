@@ -22,6 +22,12 @@ namespace KoscielniakInfo.Controllers
             var certificates = db.Certificates.Include(c => c.Skill);
             return View(await certificates.ToListAsync());
         }
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult> Admin()
+        {
+            var certificates = db.Certificates.Include(c => c.Skill);
+            return View(await certificates.ToListAsync());
+        }
 
         // GET: Certificates/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -39,6 +45,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Certificates/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.SkillID = new SelectList(db.Skills, "Id", "Name");
@@ -50,6 +57,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "ID,Name,TeacherName,TeacherURL,CompanyName,CompanyURL,StartDate,EndDate,SkillID")] Certificate certificate)
         {
             if (ModelState.IsValid)
@@ -64,6 +72,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Certificates/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +93,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Name,TeacherName,TeacherURL,CompanyName,CompanyURL,StartDate,EndDate,SkillID")] Certificate certificate)
         {
             if (ModelState.IsValid)
@@ -97,6 +107,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Certificates/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -114,6 +125,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Certificates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Certificate certificate = await db.Certificates.FindAsync(id);

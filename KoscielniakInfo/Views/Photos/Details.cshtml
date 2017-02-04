@@ -63,7 +63,11 @@
         <hr />
 
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.PhotoID }) |
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.PhotoID }) <p>|</p>
+        }
+        
         @Html.ActionLink("Back to List", "Index")
     </p>
 </div>

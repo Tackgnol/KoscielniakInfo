@@ -24,6 +24,11 @@ namespace KoscielniakInfo.Controllers
         {
             return View(await db.Schools.ToListAsync());
         }
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult> Admin()
+        {
+            return View(await db.Schools.ToListAsync());
+        }
 
         // GET: Schools/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -57,6 +62,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "Id,University,Faculty,Course,Level,EuGradeId,ThesisPromoter,ThesisTitle,From,To")] School school, string[] selectedProjects)
         {
             if (selectedProjects != null)
@@ -89,6 +95,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Schools/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -113,6 +120,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id, string[] selectedProjects)
         {
             if (id == null)
@@ -157,6 +165,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Schools/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -174,6 +183,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Schools/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             School school = await db.Schools.FindAsync(id);
@@ -209,9 +219,6 @@ namespace KoscielniakInfo.Controllers
             }
             base.Dispose(disposing);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
         private void PopulateGradeDropDownList(object selectedGrade = null)
         {
             var gradeQuery = from g in db.EuGrades

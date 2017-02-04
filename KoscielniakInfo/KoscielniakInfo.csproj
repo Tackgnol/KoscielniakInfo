@@ -362,6 +362,12 @@
     <Content Include="Views\Hobbies\Details.cshtml" />
     <Content Include="Views\Hobbies\Edit.cshtml" />
     <Content Include="Views\Hobbies\Index.cshtml" />
+    <Content Include="Views\Hobbies\Admin.cshtml" />
+    <Content Include="Views\Jobs\Admin.cshtml" />
+    <Content Include="Views\Photos\Admin.cshtml" />
+    <Content Include="Views\Projects\Admin.cshtml" />
+    <Content Include="Views\Schools\Admin.cshtml" />
+    <Content Include="Views\Certificates\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

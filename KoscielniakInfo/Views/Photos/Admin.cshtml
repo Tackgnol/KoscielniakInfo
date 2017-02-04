@@ -1,11 +1,14 @@
 ﻿@model IEnumerable<KoscielniakInfo.Models.Photo>
 
 @{
-    ViewBag.Title = "Photos";
+    ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Admin</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
  
@@ -36,15 +39,11 @@
             @Html.DisplayFor(modelItem => item.URL)
         </td>
         <td>
-
-            @Html.ActionLink("Details", "Details", new { id=item.PhotoID }) 
-
+            @Html.ActionLink("Edit", "Edit", new { id=item.PhotoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PhotoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PhotoID })
         </td>
     </tr>
 }
 
 </table>
-@if (User.IsInRole("Admin"))
-{
-    @Html.ActionLink("[Admin]", "Admin")
-}

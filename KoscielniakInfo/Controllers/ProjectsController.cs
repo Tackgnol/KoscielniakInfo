@@ -21,6 +21,11 @@ namespace KoscielniakInfo.Controllers
         {
             return View(await db.Projects.ToListAsync());
         }
+       
+        public async Task<ActionResult> Admin()
+        {
+            return View(await db.Projects.ToListAsync());
+        }
 
         // GET: Projects/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -38,6 +43,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             PopulateJobs();
@@ -50,6 +56,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "Id,Name,Role,Description,Outcome,PortfolioLink,SchoolID,JobId")] Project project)
         {
             if (ModelState.IsValid)
@@ -64,6 +71,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,6 +93,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Role,Description,Outcome,PortfolioLink,SchoolID,JobId")] Project project)
         {
             if (ModelState.IsValid)
@@ -99,6 +108,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,6 +126,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Project project = await db.Projects.FindAsync(id);

@@ -21,6 +21,11 @@ namespace KoscielniakInfo.Controllers
         {
             return View(await db.Hobbies.ToListAsync());
         }
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult> Admin()
+        {
+            return View(await db.Hobbies.ToListAsync());
+        }
 
         // GET: Hobbies/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -38,6 +43,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Hobbies/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -48,6 +54,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description")] Hobby hobby)
         {
             if (ModelState.IsValid)
@@ -61,6 +68,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Hobbies/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,6 +88,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description")] Hobby hobby)
         {
             if (ModelState.IsValid)
@@ -92,6 +101,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Hobbies/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +119,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Hobbies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Hobby hobby = await db.Hobbies.FindAsync(id);

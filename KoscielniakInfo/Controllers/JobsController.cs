@@ -22,6 +22,11 @@ namespace KoscielniakInfo.Controllers
         {
             return View(await db.Jobs.ToListAsync());
         }
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult> Admin()
+        {
+            return View(await db.Jobs.ToListAsync());
+        }
 
         // GET: Jobs/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -39,6 +44,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Jobs/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var job = new Job();
@@ -53,6 +59,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "id,CompanyName,Role,Position,StartDate,EndDate,WikipediaCompanyName,Description")] Job job, string[] selectedProjects)
         {
             if (selectedProjects != null)
@@ -77,6 +84,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Jobs/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -99,6 +107,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id, string[] selectedProjects)
         {
             if (id==null)
@@ -123,6 +132,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Jobs/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,6 +150,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Job job = await db.Jobs.FindAsync(id);

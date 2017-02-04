@@ -27,6 +27,12 @@ namespace KoscielniakInfo.Controllers
             var photos = db.Photos;
             return View(await photos.ToListAsync());
         }
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Admin()
+        {
+            var photos = db.Photos;
+            return View(await photos.ToListAsync());
+        }
 
         // GET: Photos/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -46,6 +52,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Photos/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             Photo photo = new Photo();
@@ -63,6 +70,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "PhotoID,JobID,SchoolID,HobbyID,CertificateID,Title,Description,Sorting,URL,isCertificate")] Photo photo)
         {
             if (ModelState.IsValid)
@@ -82,6 +90,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Photos/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +116,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> EditPost(int? Id)
         {
             if (Id == null)
@@ -154,6 +164,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: Photos/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -171,6 +182,7 @@ namespace KoscielniakInfo.Controllers
         // POST: Photos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Photo photo = await db.Photos.FindAsync(id);

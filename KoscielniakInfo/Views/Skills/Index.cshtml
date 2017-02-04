@@ -6,9 +6,6 @@
 
 <h2>Skills</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     @foreach (var skillGroup in ViewBag.GroupedSkills)
     {
@@ -31,3 +28,7 @@
     }
 </table>
 
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("[Admin]", "Admin")
+}

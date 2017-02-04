@@ -3,47 +3,85 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #AboutMeSection {
+            border-right: 1px dashed #333;
+                min-height:100px;
+                height:100px;
+        }
+
+    </style>
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 @Html.ActionLink("Kościelniak.Info", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse">
+            <div class="navbar-collapse collapse">
 
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>
-                        @Html.ActionLink("CV", "Index", "CV")
+                        <a data-toggle="dropdown" href="~/Views/CV/Index.cshtml">CV <i class="glyphicon glyphicon-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/CV/">CV</a></li>
+                            <li><a href="~/Schools/">Education</a></li>
+                            <li><a href="~/Jobs/">Expirience</a></li>
+                            <li><a href="~/Projects/">Projects</a></li>
+                            <li><a href="~/Skills/">Skills</a></li>
+                            <li><a href="~/Certificates/">Certificates</a></li>
+                            <li><a href="~/Hobbies/">Hobbies</a></li>
+                        </ul>
                     </li>
 
-                    <li>@Html.ActionLink("Education", "Index", "Schools")</li>
-                    <li>@Html.ActionLink("Skills", "Index", "Skills")</li>
-                    <li>@Html.ActionLink("Certificates", "Index", "Certificates")</li>
-                    <li>@Html.ActionLink("Photos", "Index", "Photos")</li>
+                    <li>@Html.ActionLink("Portfolio (under construction)", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Dev Blog (under construction)", "Index", "Home")</li>
 
-                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+    <div id="AboutMe" class="well well-sm ">
+
+
+        <div class="container">
+            <div id="AboutMeSection" class="col-md-1">
+                <img src="~/Common Images/Foto.PNG" height="100">
+            </div>
+
+            <div id="AboutMeSection" class="col-md-2"">
+                <a href="https://github.com/Tackgnol"><b>My Github</b>  <img src="~/Common Images/Octocat.png" /></a><br />
+                <a href="http://stackoverflow.com/users/4288279/tackgnol"><b>  My StackOverflow <img src="~/Common Images/StackOverflow.png" /></b></a><br />
+                <a href="https://www.linkedin.com/in/adam-ko%C5%9Bcielniak-495bb12a/"><b>My LinkedIn  <img src="~/Common Images/LinkedIn.png" /></b></a>
+            </div>
+            <div id="AboutMeSection" class="col-md-2">
+                <a href="http://www.last.fm/user/little_maggot"><b>Last fm  </b><img src="~/Common Images/LastFM.png" /></a><br />
+                <a href="http://steamcommunity.com/id/Tackgnol"><b>My Steam  <img src="~/Common Images/Steam.png" /></b></a><br />
+                <a href="https://www.endomondo.com/profile/29544478"><b>My Endomondo  <img src="~/Common Images/Endomondo.png" /></b></a>
+            </div>
+        </div>
+
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - By Adam Kościelniak using ASP.NET</p>
         </footer>
     </div>
 
