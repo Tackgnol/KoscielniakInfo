@@ -90,7 +90,7 @@
         @foreach (var photo in Model.Photos)
         {
             int i = 0;
-            <a href="~/Photos/@photo.URL"><img src="~/Photos/Miniatures/@photo.URL" alt="@photo.Description" /></a>
+            <a href="~/Pictures/@photo.URL"><img src="~/Pictures/Miniatures/@photo.URL" alt="@photo.Description" /></a>
             if (i % 3 == 0 && i >= 3)
             {
                 <br />   }

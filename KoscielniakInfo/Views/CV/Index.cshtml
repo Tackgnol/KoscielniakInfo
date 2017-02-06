@@ -50,9 +50,7 @@
             @if (item.Projects.Count > 0)
             {
                 <div class="row">
-                    <div class="col-md-1">
 
-                    </div>
                     <div class="col-md-9">
                         <h4 onclick='ShowHideElementJQ("divJob+@item.id", "iJob+@item.id")'>
                             <i>Projects</i>
@@ -67,14 +65,13 @@
                                 <p onclick='ShowHideElementJQ("divJobProject+@subItem.Id", "iJobProject+@subItem.Id")'><b>@Html.DisplayFor(modelItem => subItem.Name)</b> <i id="iJobProject+@subItem.Id" class="glyphicon glyphicon-chevron-down"></i></p>
                                 <div id="divJobProject+@subItem.Id" class="row" style="display:none">
                                     <div class="row">
-                                        <div class="col-md-1">
-                                        </div>
+                                        <div class="col-md-1"></div>
                                         <div class="col-md-3">
                                             <p class="text-right">
                                                 @Html.LabelFor(modelItem => subItem.Role)
                                             </p>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-8">
                                             @Html.DisplayFor(modelItem => subItem.Role)
                                         </div>
                                     </div>
@@ -86,7 +83,7 @@
                                                 @Html.LabelFor(modelItem => subItem.Description)
                                             </p>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-8">
                                             @Html.DisplayFor(modelItem => subItem.Description)
                                         </div>
                                     </div>
@@ -98,7 +95,7 @@
                                                 @Html.LabelFor(modelItem => subItem.Outcome)
                                             </p>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-8">
                                             @Html.DisplayFor(modelItem => subItem.Outcome)
                                         </div>
                                     </div>

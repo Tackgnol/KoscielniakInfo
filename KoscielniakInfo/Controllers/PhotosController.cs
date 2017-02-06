@@ -187,8 +187,8 @@ namespace KoscielniakInfo.Controllers
         {
             Photo photo = await db.Photos.FindAsync(id);
             db.Photos.Remove(photo);
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Photos/Miniatures/"), photo.URL));
-            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Photos/"), photo.URL));
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Pictures/Miniatures/"), photo.URL));
+            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Pictures/"), photo.URL));
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -253,11 +253,11 @@ namespace KoscielniakInfo.Controllers
                 {
                     string extension = Path.GetExtension(file.FileName.ToString().ToLower());
                     string fileName = "CVImage" + String.Format("{0:D5}", db.Photos.Count()) + extension;
-                    var path = Path.Combine(Server.MapPath("~/Photos/"), fileName);
+                    var path = Path.Combine(Server.MapPath("~/Pictures/"), fileName);
                     file.SaveAs(path);
                     Image imageToResize = Image.FromFile(path);
                     Bitmap resizedImage = ResizeImage(imageToResize, 200, 133);
-                    resizedImage.Save(Path.Combine(Server.MapPath("~/Photos/Miniatures/"), fileName));
+                    resizedImage.Save(Path.Combine(Server.MapPath("~/Pictures/Miniatures/"), fileName));
                     imageToResize.Dispose();
                     resizedImage.Dispose();
                     return fileName;
