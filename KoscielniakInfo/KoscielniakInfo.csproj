@@ -266,8 +266,10 @@
     <Compile Include="ViewModels\SelectedProject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common Images\ceri.pl.png" />
     <Content Include="Common Images\InProgress.jpg" />
     <Content Include="Common Images\Completed.png" />
+    <Content Include="Common Images\uni.lodz.pl.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

@@ -45,7 +45,8 @@
                 </p>
             </div>
             <div class="col-md-1">
-                <img src="//logo.clearbit.com/@item.WikipediaCompanyName?size=80" />
+
+                <img src="//logo.clearbit.com/@item.WikipediaCompanyName?size=80" onerror="this.onerror = null; this.src = '/Common Images/@item.WikipediaCompanyName'+'.png';" />
             </div>
             @if (item.Projects.Count > 0)
             {
@@ -53,7 +54,7 @@
 
                     <div class="col-md-9 col-md-offset-1">
                         <h4 onclick='ShowHideElementJQ("divJob+@item.id", "iJob+@item.id")'>
-                            <i>Projects</i>
+                            <i class="glyphicon glyphicon-paperclip"></i> <i>Projects</i>
                             <i id="iJob+@item.id" class="glyphicon glyphicon-chevron-down"></i>
                         </h4>
                         <div class=row id="divJob+@item.id" style="display:none">
@@ -164,12 +165,10 @@
             @if (item.Projects.Count > 0)
             {
                 <div class="row">
-                    <div class="col-md-1">
 
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-md-offset-1">
                         <h4 onclick='ShowHideElementJQ("divSchool+@item.Id","iSchool+@item.Id")'>
-                            <i>Projects</i>
+                            <i class="glyphicon glyphicon-paperclip"></i> <i>Projects</i>
                             <i id="iSchool+@item.Id" class="glyphicon glyphicon-chevron-down"></i>
                         </h4>
                         <div class=row id="divSchool+@item.Id" style="display:none">

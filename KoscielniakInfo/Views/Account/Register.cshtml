@@ -4,7 +4,9 @@
 }
 
 <h2>@ViewBag.Title.</h2>
-
+<p>
+    Here you may register, registering currently does nothing, however in the future I plan to add some features to make it worth your while, for now feel free to omit this step ;)
+</p>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
