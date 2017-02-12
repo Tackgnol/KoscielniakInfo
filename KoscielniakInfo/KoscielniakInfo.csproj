@@ -175,77 +175,25 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\PortfolioEntriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
     <Compile Include="Controllers\SchoolsController.cs" />
-    <Compile Include="Migrations\201701042004555_InitialCreate.cs" />
-    <Compile Include="Migrations\201701042004555_InitialCreate.Designer.cs">
-      <DependentUpon>201701042004555_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201702111543539_Portfolio.cs" />
+    <Compile Include="Migrations\201702111543539_Portfolio.Designer.cs">
+      <DependentUpon>201702111543539_Portfolio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701062005404_photochange.cs" />
-    <Compile Include="Migrations\201701062005404_photochange.Designer.cs">
-      <DependentUpon>201701062005404_photochange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701062013028_photos2.cs" />
-    <Compile Include="Migrations\201701062013028_photos2.Designer.cs">
-      <DependentUpon>201701062013028_photos2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701081125128_finishedChange.cs" />
-    <Compile Include="Migrations\201701081125128_finishedChange.Designer.cs">
-      <DependentUpon>201701081125128_finishedChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701081148345_gradeTable.cs" />
-    <Compile Include="Migrations\201701081148345_gradeTable.Designer.cs">
-      <DependentUpon>201701081148345_gradeTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701081211279_euGrade.cs" />
-    <Compile Include="Migrations\201701081211279_euGrade.Designer.cs">
-      <DependentUpon>201701081211279_euGrade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701081228391_euGrade1.cs" />
-    <Compile Include="Migrations\201701081228391_euGrade1.Designer.cs">
-      <DependentUpon>201701081228391_euGrade1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701081230234_euGrade2.cs" />
-    <Compile Include="Migrations\201701081230234_euGrade2.Designer.cs">
-      <DependentUpon>201701081230234_euGrade2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701101927344_ProjectUpdate.cs" />
-    <Compile Include="Migrations\201701101927344_ProjectUpdate.Designer.cs">
-      <DependentUpon>201701101927344_ProjectUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701211418285_Skill.cs" />
-    <Compile Include="Migrations\201701211418285_Skill.Designer.cs">
-      <DependentUpon>201701211418285_Skill.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701220936585_Certificates.cs" />
-    <Compile Include="Migrations\201701220936585_Certificates.Designer.cs">
-      <DependentUpon>201701220936585_Certificates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701220958038_Certificates1.cs" />
-    <Compile Include="Migrations\201701220958038_Certificates1.Designer.cs">
-      <DependentUpon>201701220958038_Certificates1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701221009099_Certificates2.cs" />
-    <Compile Include="Migrations\201701221009099_Certificates2.Designer.cs">
-      <DependentUpon>201701221009099_Certificates2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701221148404_seedingTrials1.cs" />
-    <Compile Include="Migrations\201701221148404_seedingTrials1.Designer.cs">
-      <DependentUpon>201701221148404_seedingTrials1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701221221057_isCertificate.cs" />
-    <Compile Include="Migrations\201701221221057_isCertificate.Designer.cs">
-      <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701281001077_projectFix.cs" />
-    <Compile Include="Migrations\201701281001077_projectFix.Designer.cs">
-      <DependentUpon>201701281001077_projectFix.cs</DependentUpon>
+    <Compile Include="Migrations\201702111631457_Categories.cs" />
+    <Compile Include="Migrations\201702111631457_Categories.Designer.cs">
+      <DependentUpon>201702111631457_Categories.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Certificate.cs" />
+    <Compile Include="Models\PortfolioEntry.cs" />
+    <Compile Include="Models\ScreenShot.cs" />
     <Compile Include="ViewModels\CV.cs" />
     <Compile Include="Models\EUGrade.cs" />
     <Compile Include="Models\School.cs" />
@@ -263,6 +211,7 @@
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SelectedCategories.cs" />
     <Compile Include="ViewModels\SelectedProject.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +316,11 @@
     <Content Include="Views\Projects\Admin.cshtml" />
     <Content Include="Views\Schools\Admin.cshtml" />
     <Content Include="Views\Certificates\Admin.cshtml" />
+    <Content Include="Views\PortfolioEntries\Create.cshtml" />
+    <Content Include="Views\PortfolioEntries\Delete.cshtml" />
+    <Content Include="Views\PortfolioEntries\Details.cshtml" />
+    <Content Include="Views\PortfolioEntries\Edit.cshtml" />
+    <Content Include="Views\PortfolioEntries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -380,53 +334,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701042004555_InitialCreate.resx">
-      <DependentUpon>201701042004555_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702111543539_Portfolio.resx">
+      <DependentUpon>201702111543539_Portfolio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701062005404_photochange.resx">
-      <DependentUpon>201701062005404_photochange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701062013028_photos2.resx">
-      <DependentUpon>201701062013028_photos2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701081125128_finishedChange.resx">
-      <DependentUpon>201701081125128_finishedChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701081148345_gradeTable.resx">
-      <DependentUpon>201701081148345_gradeTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701081211279_euGrade.resx">
-      <DependentUpon>201701081211279_euGrade.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701081228391_euGrade1.resx">
-      <DependentUpon>201701081228391_euGrade1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701081230234_euGrade2.resx">
-      <DependentUpon>201701081230234_euGrade2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701101927344_ProjectUpdate.resx">
-      <DependentUpon>201701101927344_ProjectUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701211418285_Skill.resx">
-      <DependentUpon>201701211418285_Skill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701220936585_Certificates.resx">
-      <DependentUpon>201701220936585_Certificates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701220958038_Certificates1.resx">
-      <DependentUpon>201701220958038_Certificates1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701221009099_Certificates2.resx">
-      <DependentUpon>201701221009099_Certificates2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701221148404_seedingTrials1.resx">
-      <DependentUpon>201701221148404_seedingTrials1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701221221057_isCertificate.resx">
-      <DependentUpon>201701221221057_isCertificate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701281001077_projectFix.resx">
-      <DependentUpon>201701281001077_projectFix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702111631457_Categories.resx">
+      <DependentUpon>201702111631457_Categories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

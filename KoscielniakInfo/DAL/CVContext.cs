@@ -20,7 +20,9 @@ namespace KoscielniakInfo.DAL
         public DbSet<Photo> Photos { get; set; }
         public DbSet<EUGrade> EuGrades { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
-
+        public DbSet<PortfolioEntry> Entries { get; set; }
+        public DbSet<ScreenShot> ScreenShots { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
