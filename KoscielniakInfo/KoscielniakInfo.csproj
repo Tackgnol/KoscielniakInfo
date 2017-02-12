@@ -177,6 +177,7 @@
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\PortfolioEntriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\ScreenShotsController.cs" />
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\CVContext.cs" />
     <Compile Include="DAL\CVInitializer.cs" />
@@ -321,6 +322,11 @@
     <Content Include="Views\PortfolioEntries\Details.cshtml" />
     <Content Include="Views\PortfolioEntries\Edit.cshtml" />
     <Content Include="Views\PortfolioEntries\Index.cshtml" />
+    <Content Include="Views\ScreenShots\Create.cshtml" />
+    <Content Include="Views\ScreenShots\Delete.cshtml" />
+    <Content Include="Views\ScreenShots\Details.cshtml" />
+    <Content Include="Views\ScreenShots\Edit.cshtml" />
+    <Content Include="Views\ScreenShots\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -51,14 +51,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UsedSkills)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UsedSkills)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.GitHubLink)
         </dt>
 
@@ -67,6 +59,13 @@
         </dd>
 
     </dl>
+    <h4>Skill List</h4>
+    <ul>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <li>@category.Name</li>
+        }
+    </ul>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

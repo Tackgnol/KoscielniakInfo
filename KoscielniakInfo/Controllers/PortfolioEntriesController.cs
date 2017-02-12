@@ -37,6 +37,9 @@ namespace KoscielniakInfo.Controllers
             {
                 return HttpNotFound();
             }
+            GetCategories(portfolioEntry, true);                         
+            
+
             return View(portfolioEntry);
         }
 
@@ -164,6 +167,7 @@ namespace KoscielniakInfo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PortfolioEntry portfolioEntry = await db.Entries.FindAsync(id);
+            GetCategories(portfolioEntry, true);
             if (portfolioEntry == null)
             {
                 return HttpNotFound();
@@ -190,7 +194,7 @@ namespace KoscielniakInfo.Controllers
             }
             base.Dispose(disposing);
         }
-        private void GetCategories(PortfolioEntry portfolioEntry)
+        private void GetCategories(PortfolioEntry portfolioEntry, bool selectedOnly=false)
         {
             var allCategories = db.Categories;
             var selectedCategories = CategoryList(portfolioEntry.Category);
@@ -204,6 +208,10 @@ namespace KoscielniakInfo.Controllers
                     Name = category.Name,
                     Selected = hashCategories.Contains(category.Name)
                 });
+            }
+            if (selectedOnly == true)
+            {
+                viewModel.RemoveAll(c => c.Selected == false);
             }
             ViewBag.Categories = viewModel;
 
