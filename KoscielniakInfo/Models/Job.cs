@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace KoscielniakInfo.Models
 {
@@ -24,6 +25,8 @@ namespace KoscielniakInfo.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
         public string WikipediaCompanyName { get; set; }
+        [UIHint("tinymce_jquery_full"), AllowHtml]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public virtual ICollection<Project> Projects {get; set;}
         public virtual ICollection<Photo> Photos { get; set; }

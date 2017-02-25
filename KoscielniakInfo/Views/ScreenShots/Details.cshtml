@@ -3,48 +3,21 @@
 @{
     ViewBag.Title = "Details";
 }
+<h3 class="text-center">
+    <b>
+        @Html.ActionLink("[Go Back]", "Details", "PortfolioEntries", new { ID = Model.PortfolioEntryID }, null)
+    </b>
+</h3>
 
-<h2>Details</h2>
+<h2 class="text-center">@Html.DisplayFor(model=>model.Type) - @Html.DisplayFor(model=>model.Description)</h2>
+
 
 <div>
-    <h4>ScreenShot</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sorting)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sorting)
-        </dd>
-
-    </dl>
+    <img src="~/Pictures/ScreenShots/@Model.ImageURL" />
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<h3 class="text-center">
+    <b>
+        @Html.ActionLink("[Go Back]", "Details", "PortfolioEntries", new { ID = Model.PortfolioEntryID }, null)
+    </b>
+</h3>

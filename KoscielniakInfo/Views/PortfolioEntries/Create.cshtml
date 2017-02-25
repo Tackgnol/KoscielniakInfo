@@ -74,7 +74,7 @@
                             foreach (var category in ViewBag.Categories)
                             {
 
-                                if (cnt++ % 3==0)
+                                if (cnt++ % 3 == 0)
                                 {
                                     @Html.Raw("</tr><tr>")
                                 }
@@ -85,13 +85,13 @@
                                        @(Html.Raw(category.Selected ? "checked=\"checked\"" : "")) />
 
 
-                                @category.Name
-                                @Html.Raw("</td>")
+                                    @category.Name
+                                    @Html.Raw("</td>")
 
+                            }
+
+                            @Html.Raw("</tr>")
                         }
-
-                        @Html.Raw("</tr>")
-                    }
                 </table>
             </div>
         </div>
@@ -115,6 +115,8 @@
             </div>
         </div>
     </div>
+
+
 }
 
 <div>
@@ -126,9 +128,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
 
-            $('#clone').click(function () {
-                $('#newCat').last().clone().appendTo('#newCats')
-            })
+        $('#clone').click(function () {
+            $('#newCat').last().clone().appendTo('#newCats')
+        })
 
     </script>
 }

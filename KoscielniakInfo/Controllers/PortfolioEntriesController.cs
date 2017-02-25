@@ -11,6 +11,7 @@ using KoscielniakInfo.DAL;
 using KoscielniakInfo.Models;
 using KoscielniakInfo.ViewModels;
 using System.Text;
+using System.IO;
 
 namespace KoscielniakInfo.Controllers
 {
@@ -19,9 +20,26 @@ namespace KoscielniakInfo.Controllers
         private CVContext db = new CVContext();
 
         // GET: PortfolioEntries
-        public async Task<ActionResult> Index()
+        [Authorize(Roles ="Admin")]
+        public async Task<ActionResult> Admin()
         {
             return View(await db.Entries.ToListAsync());
+        }
+
+        public async Task<ActionResult> Index(int? id)
+        {
+            ViewBag.Categories = db.Categories;
+            if (id==null)
+            {
+                return View(await db.Entries.ToListAsync());
+            }
+            var currentCategory = await db.Categories.FindAsync(id);
+            var filteredEntries = from e in db.Entries
+                                  where e.Category.Contains(currentCategory.Name)
+                                  select e;
+
+            return View(await filteredEntries.ToListAsync());
+                                     
         }
 
         // GET: PortfolioEntries/Details/5
@@ -32,7 +50,7 @@ namespace KoscielniakInfo.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PortfolioEntry portfolioEntry = await db.Entries.FindAsync(id);
-
+            GetScreenShots(portfolioEntry);
             if (portfolioEntry == null)
             {
                 return HttpNotFound();
@@ -44,6 +62,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: PortfolioEntries/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var entry = new PortfolioEntry();
@@ -56,6 +75,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "ID,Name,Client,Description,Start,End,UsedSkills,GitHubLink")] PortfolioEntry portfolioEntry, string[] selectedCategories, string[] newCategories)
         {
             if (ModelState.IsValid)
@@ -98,6 +118,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: PortfolioEntries/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,6 +139,7 @@ namespace KoscielniakInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Name,Client,Description,Start,End,GitHubLink")] PortfolioEntry portfolioEntry, string[] selectedCategories, string[] newCategories)
         {
             if (ModelState.IsValid)
@@ -160,6 +182,7 @@ namespace KoscielniakInfo.Controllers
         }
 
         // GET: PortfolioEntries/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -178,13 +201,26 @@ namespace KoscielniakInfo.Controllers
         // POST: PortfolioEntries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             PortfolioEntry portfolioEntry = await db.Entries.FindAsync(id);
+            var entryScreenshots = from s in db.ScreenShots
+                                   where s.PortfolioEntryID == id
+                                   select s;
+            foreach (var screen in entryScreenshots)
+            {
+                if (screen !=null)
+                {
+                    screen.PortfolioEntryID = null;
+                }
+                
+            }
             db.Entries.Remove(portfolioEntry);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        [HttpPost]
 
         protected override void Dispose(bool disposing)
         {
@@ -239,5 +275,46 @@ namespace KoscielniakInfo.Controllers
             }
 
         }
+        private void GetScreenShots(PortfolioEntry portfolioEntry)
+        {
+            Dictionary<string, IEnumerable<ScreenShot>> Dict = new Dictionary<string, IEnumerable<ScreenShot>>();
+            string displayName;
+            foreach (var type in Enum.GetNames(typeof(ScreenShotType)))
+            {
+                switch (type)
+                {
+                    case "UseCase":
+                        displayName = "Use Cases: ";
+                        break;
+                    case "Behavior":
+                        displayName = "Behavioral Diagrams: ";
+                        break;
+                    case "ClassStructure":
+                        displayName = "Class Structure Diagrams: ";
+                        break;
+                    case "MainPage":
+                        displayName = "Main view: ";
+                        break;
+                    case "SomthingCool":
+                        displayName = "Additional Views: ";
+                        break;
+                    default:
+                        displayName = "Unknown Type: ";
+                        break;
+                }
+                var typeScreens = from s in portfolioEntry.ScreenShots
+                                  where s.Type.ToString() == type
+                                  select s;
+                if (typeScreens.Count() != 0)
+                {
+                    Dict.Add(displayName, typeScreens);
+                }
+                
+            }
+            ViewBag.ScreenShotDict = Dict;
+
+        }
+
+
     }
 }

@@ -1,5 +1,18 @@
 ﻿@model KoscielniakInfo.Models.PortfolioEntry
+@using ImageResizer;
+@section Scripts {
 
+    <script>
+        $(function () {
+            $('.pop').on('click', function () {
+                var index = parseInt($(this).attr("id").replace('POP-',''), 10);
+                $('.imagepreview').attr('src', $(this).find('img').attr('src'));
+                $('#imagemodal-' + index).modal('show');
+            });
+        });
+    </script>
+
+}
 @{
     ViewBag.Title = "Details";
 }
@@ -7,16 +20,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>PortfolioEntry</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Client)
@@ -55,7 +61,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GitHubLink)
+            <a href="@Html.DisplayFor(model => model.GitHubLink)">@Html.DisplayFor(model => model.GitHubLink)</a>
         </dd>
 
     </dl>
@@ -66,8 +72,34 @@
             <li>@category.Name</li>
         }
     </ul>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    @foreach (var element in ViewBag.ScreenShotDict)
+    {
+        <h3>@element.Key</h3>
+        foreach (var screenShot in element.Value)
+        {
+            <a href="#" class="pop" id="POP-@screenShot.ID">
+                <img src="~/Pictures/ScreenShots/@screenShot.ImageURL"  />
+            </a>
+            <div class="modal fade" id="imagemodal-@screenShot.ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <img src="" class="imagepreview" style="width: 100%;">
+                            <p>@screenShot.Description</p>
+
+                            @Html.ActionLink("[See full sized]", "Details", "ScreenShots", new {id = screenShot.ID }, null)
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    </div>

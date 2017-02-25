@@ -27,5 +27,6 @@ namespace KoscielniakInfo.Models
         public ScreenShotType Type { get; set; }
         public string ImageURL { get; set; }
         public int Sorting { get; set; }
+        public int? PortfolioEntryID { get; set; }
     }
 }

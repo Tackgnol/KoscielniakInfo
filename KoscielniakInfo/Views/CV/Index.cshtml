@@ -41,7 +41,7 @@
                 <p class="text-left">
                     <b>@Html.DisplayFor(modelItem => item.CompanyName) </b><br />
                     <b>@Html.DisplayFor(modelItem => item.Role)</b> <br />
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.Raw(item.Description)
                 </p>
             </div>
             <div class="col-md-1">

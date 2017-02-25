@@ -1,69 +1,68 @@
 ﻿@model IEnumerable<KoscielniakInfo.Models.PortfolioEntry>
+@using ImageResizer
 
 @{
     ViewBag.Title = "Index";
+    int entryID = 1;
+    string entryDivClass;
+    string src;
 }
+<div class="container">
+    <div class="col-md-12 text-center">
+        <h2>My portfolio</h2>
 
-<h2>Index</h2>
+        <a href="/portfolioEntries/Index/" class="btn btn-default btn-lg">All</a>
+        @foreach (var category in ViewBag.Categories)
+        {
+            <a href="/portfolioEntries/Index/@category.ID" class="btn btn-default btn-lg">@category.Name</a>
+        }
+    </div>
+</div>
+<br />
+<div class="container">
+    @foreach (var item in Model)
+    {
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Start)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.End)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GitHubLink)
-        </th>
-        <th></th>
-    </tr>
+        if (entryID % 2 == 0)
+        {
+            entryDivClass = "margin:10 auto; margin-top:25px; float:right;box-shadow: 5px 5px grey;";
+        }
+        else
+        {
+            entryDivClass = "margin:10 auto; margin-top:25px; float:left;box-shadow: 5px 5px grey;";
+        }
+        <div class="col-md-6" style="display:inline-block">
+            <div class="hovereffect" style="@entryDivClass">
+                @if (item.ScreenShots.Count > 0)
+                {
+                    <img class="img-responsive" src="~/Pictures/ScreenShots/@item.ScreenShots.FirstOrDefault().ImageURL?width=400&height=300&mode=carve" />
+                }
+                else
+                {
+                    <img class="img-responsive" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=There%20is%20nothing%20here...Yey&w=400&h=300" />
+                }
+                <div class="overlay">
+                    <h2>@item.Name</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Start)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.End)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GitHubLink)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                    <a href="~/PortfolioEntries/Details/@item.ID" class="info">Read More
+                        <br />
+                        <div class="row">
+                            @{
+                                List<string> categories = item.Category.Split(';').ToList();
 
-</table>
+                                foreach (string category in categories)
+                                {
+                                    src = HttpUtility.UrlEncode(category) + ".png";
+                                    <div class="col-md-4" style="margin-top:15px;">
+                                        <img class="img-responsive" src="~/Common Images/TechnologyIcons/@src?height=50&mode=carve" />
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+                            entryID++;
+                        }
+</div>

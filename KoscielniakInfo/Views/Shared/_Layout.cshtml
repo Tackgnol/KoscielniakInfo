@@ -14,6 +14,10 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("//tinymce.cachefly.net/4.0/tinymce.min.js")
+    <script>
+    tinymce.init({ selector: 'textarea' });
+    </script>
 
 </head>
 <body>
@@ -48,8 +52,8 @@
                         </ul>
                     </li>
 
-                    <li>@Html.ActionLink("Portfolio (under construction)", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Dev Blog (under construction)", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Portfolio", "Index", "PortfolioEntries")</li>
+                    <li><a href="https://adamkoscielniak.wordpress.com/">DevBlog (temporarely on Wordpress)</a></li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
