@@ -268,7 +268,8 @@
             <div class="col-md-7">
                 <p class="text-left">
                     <b>@Html.DisplayFor(modelItem => item.CompanyName) — @Html.DisplayFor(modelItem => item.Name) </b> <br />
-                    @Html.DisplayFor(modelItem => item.TeacherName)
+                    @Html.DisplayFor(modelItem => item.TeacherName) <br />
+                    <a href="~/Certificates/Details/@item.ID">[Go to certificate]</a>
 
                 </p>
             </div>

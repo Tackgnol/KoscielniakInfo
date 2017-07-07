@@ -31,7 +31,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TeacherName)
+            @if (Model.TeacherURL != null)
+            {
+                <a href="@Model.TeacherURL">@Html.DisplayFor(model => model.TeacherName)</a>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.TeacherName)
+            }
+
         </dd>
 
         <dt>
@@ -39,7 +47,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CompanyName)
+            @if (Model.CompanyURL!=null)
+            {
+                <a href="@Model.CompanyURL">@Html.DisplayFor(model => model.CompanyName)</a>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.CompanyName)
+            }
+
         </dd>
 
         <dt>
@@ -72,10 +88,9 @@
         i++;
     }
 </div>
-<p>
     @if (User.IsInRole("Admin"))
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) <p> | </p>
     }
     @Html.ActionLink("Back to List", "Index")
-</p>
+

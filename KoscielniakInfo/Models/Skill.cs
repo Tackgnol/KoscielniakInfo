@@ -6,7 +6,7 @@ using System.Web;
 
 namespace KoscielniakInfo.Models
 {
-    public enum Level { Advanced, Intermediate, Begginer }
+    public enum Level { Advanced, Intermediate, Beginner }
     public class Skill
     {
         

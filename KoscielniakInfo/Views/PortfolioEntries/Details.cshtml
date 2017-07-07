@@ -78,7 +78,7 @@
         foreach (var screenShot in element.Value)
         {
             <a href="#" class="pop" id="POP-@screenShot.ID">
-                <img src="~/Pictures/ScreenShots/@screenShot.ImageURL"  />
+                <img src="~/Pictures/ScreenShots/@screenShot.ImageURL?h=200&mode=carve" />
             </a>
             <div class="modal fade" id="imagemodal-@screenShot.ID" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

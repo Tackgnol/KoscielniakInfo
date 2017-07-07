@@ -10,7 +10,7 @@ namespace KoscielniakInfo.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "CV");
         }
 
         public ActionResult About()
